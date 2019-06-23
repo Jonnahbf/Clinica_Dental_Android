@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         db= Room.databaseBuilder(getApplicationContext(),
                 Database.class, "Prestamo").allowMainThreadQueries().build();
         pacienteList.addAll(db.pacienteDao().ObtenerTodo());
+        adminList.addAll(db.adminDao().ObtenerTodo());
     }
 
     public void onClickIngresar(View v){

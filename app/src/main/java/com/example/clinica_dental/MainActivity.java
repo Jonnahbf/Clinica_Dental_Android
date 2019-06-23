@@ -26,9 +26,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         db= Room.databaseBuilder(getApplicationContext(),
                 Database.class, "Prestamo").allowMainThreadQueries().build();
+        /*Admin admin = new Admin();
+        admin.setId_admin(1);
+        admin.setPassword("jonna222");
+        admin.setUser_name("jonnahbf");
+        admin.setNombre("Jonathan");
+        admin.setApellido("Ochoa");
+        db.adminDao().Insertar(admin);*/
         adminList = db.adminDao().ObtenerTodo();
         Toast.makeText(this, "Tamaño " + String.valueOf(adminList.size()), Toast.LENGTH_SHORT).show();
     }
