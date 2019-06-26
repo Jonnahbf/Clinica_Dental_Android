@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 Database.class, "Prestamo").allowMainThreadQueries().build();
         pacienteList.addAll(db.pacienteDao().ObtenerTodo());
         adminList.addAll(db.adminDao().ObtenerTodo());
+        OcultarBoton();
     }
 
     public void onClickIngresar(View v){
@@ -50,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickNuevoPaciente(View v){
+        user_name.setText("");
+        password.setText("");
         Intent intent = new Intent(this, Registro_Paciente_Activity.class);
         startActivityForResult(intent, 2000);
     }
@@ -93,15 +96,25 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void OcultarBoton(){
+        btn_registrarse.setVisibility(View.INVISIBLE);
+        if(tipo_usuario == 3){
+            btn_registrarse.setVisibility(View.VISIBLE);
+        }
+    }
+
     public void EsUnAdmin(){
-        for(int i = 0; i<adminList.size(); i++){
+       for(int i = 0; i<adminList.size(); i++){
             if(name.equalsIgnoreCase(adminList.get(i).getUser_name())){
                 if(pwd.equalsIgnoreCase(adminList.get(i).getPassword())){
                     Toast.makeText(this, "Todo bien, todo correcto", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, Administrador_Activity.class);
+                    startActivity(intent);
                     break;
                 }
             }
         }
+
     }
 
     public void EsUnDoctor(){
@@ -116,12 +129,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void EsUnPaciente(){
-        for(int i = 0; i<pacienteList.size(); i++){
-            if(name.equalsIgnoreCase(pacienteList.get(i).getUser_name())){
-                if(pwd.equalsIgnoreCase(pacienteList.get(i).getPassword())){
-                    Toast.makeText(this, "Todo bien, todo correcto", Toast.LENGTH_SHORT).show();
-                    break;
-                }
+        Paciente paciente = db.pacienteDao().ObtenerPorUser_Name(user_name.getText().toString());
+        if(paciente == null){
+            Toast.makeText(this, "Usuario o contraseña incorrecto", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            pwd = password.getText().toString();
+            if(pwd.equalsIgnoreCase(paciente.getPassword())){
+                Intent intent = new Intent(this, Pacientes_Activity.class);
+                startActivity(intent);
+                user_name.setText("");
+                password.setText("");
+            }
+            else{
+                Toast.makeText(this, "Usuario ", Toast.LENGTH_SHORT).show();
             }
         }
     }

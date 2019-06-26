@@ -16,4 +16,7 @@ public interface PacienteDao {
 
     @Query("SELECT * FROM PacienteTB")
     List<Paciente> ObtenerTodo();
+
+    @Query("SELECT * FROM PacienteTB where user_name=:user_name")
+    Paciente ObtenerPorUser_Name(String user_name);
 }

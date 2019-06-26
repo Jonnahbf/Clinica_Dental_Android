@@ -91,12 +91,9 @@ public class Registro_Paciente_Activity extends AppCompatActivity {
 
     public int Verificar_Nombre_Usuario(){ //Verifica que un paciente no se haya registrado con ese nombre de usuario anteriormente
         int variable = 1;
-        String aux = usuario.getText().toString();
-        for(int i=0; i<pacienteList.size(); i++){
-            if(aux.equalsIgnoreCase(pacienteList.get(i).getUser_name())){
-                variable = 0;
-                break;
-            }
+        Paciente paciente = db.pacienteDao().ObtenerPorUser_Name(usuario.getText().toString());
+        if(paciente != null){
+            variable = 0;
         }
         return variable;
     }
