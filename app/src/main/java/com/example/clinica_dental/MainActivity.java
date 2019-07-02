@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.example.clinica_dental.DB.Database;
 import com.example.clinica_dental.TablasDB.Admin;
+import com.example.clinica_dental.TablasDB.Doctor;
+import com.example.clinica_dental.TablasDB.DoctorhasEspecialidad;
+import com.example.clinica_dental.TablasDB.Especialidad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,22 +24,22 @@ public class MainActivity extends AppCompatActivity {
     public Database db;
     public int tipo_usuario = 0;
     List<Admin> adminList = new ArrayList<>();
-
+    List<Especialidad> especialidadList = new ArrayList<>();
+    List<Doctor> doctorList = new ArrayList<>();
+    List<DoctorhasEspecialidad> tieneEspecialidadList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db= Room.databaseBuilder(getApplicationContext(),
                 Database.class, "Prestamo").allowMainThreadQueries().build();
-        /*Admin admin = new Admin();
+       /* Admin admin = new Admin();
         admin.setId_admin(1);
         admin.setPassword("jonna222");
         admin.setUser_name("jonnahbf");
         admin.setNombre("Jonathan");
         admin.setApellido("Ochoa");
         db.adminDao().Insertar(admin);*/
-        adminList = db.adminDao().ObtenerTodo();
-        Toast.makeText(this, "Tamaño " + String.valueOf(adminList.size()), Toast.LENGTH_SHORT).show();
     }
 
     @Override

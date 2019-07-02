@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import com.example.clinica_dental.DB.Database;
 import com.example.clinica_dental.TablasDB.Paciente;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +73,7 @@ public class Registro_Paciente_Activity extends AppCompatActivity {
     public void CargarEditText(){
         nombre = findViewById(R.id.et_nombres);
         apellido = findViewById(R.id.et_apellidos);
-        telefono = findViewById(R.id.et_telefono);
+        telefono = findViewById(R.id.et_user_name);
         usuario = findViewById(R.id.et_nombre_usuario);
         pwd = findViewById(R.id.et_contraseña);
         pwd2 = findViewById(R.id.et_repita_contraseña);
