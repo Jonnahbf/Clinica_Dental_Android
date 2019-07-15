@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.clinica_dental.Doctores.Agregar_Doctor_Activity;
+import com.example.clinica_dental.Doctores.Ver_Doctores_Activity;
 
 public class Administrador_Activity extends AppCompatActivity {
 
@@ -18,7 +19,8 @@ public class Administrador_Activity extends AppCompatActivity {
     }
 
     public void onClickVerDoctores(View v) {
-
+        Intent intent = new Intent(Administrador_Activity.this, Ver_Doctores_Activity.class);
+        startActivity(intent);
     }
 
     public void onClickAgregarDoctor(View v){
