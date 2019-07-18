@@ -73,7 +73,7 @@ public class Registro_Paciente_Activity extends AppCompatActivity {
     public void CargarEditText(){
         nombre = findViewById(R.id.et_nombres);
         apellido = findViewById(R.id.et_apellidos);
-        telefono = findViewById(R.id.et_user_name);
+        telefono = findViewById(R.id.et_telefono);
         usuario = findViewById(R.id.et_nombre_usuario);
         pwd = findViewById(R.id.et_contraseña);
         pwd2 = findViewById(R.id.et_repita_contraseña);

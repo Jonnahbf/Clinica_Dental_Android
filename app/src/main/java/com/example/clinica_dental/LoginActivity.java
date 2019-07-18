@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.clinica_dental.DB.Database;
+import com.example.clinica_dental.Doctores.Principal_Doctor_Activity;
 import com.example.clinica_dental.TablasDB.Admin;
+import com.example.clinica_dental.TablasDB.Doctor;
 import com.example.clinica_dental.TablasDB.Paciente;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     int tipo_usuario = 0;
     List<Admin> adminList = new ArrayList<>();
     List<Paciente> pacienteList = new ArrayList<>();
+    List<Doctor> doctorList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Bundle bundle = getIntent().getExtras();
         tipo_usuario = bundle.getInt("Usuario");
-        user_name = findViewById(R.id.et_user_name);
+        user_name = findViewById(R.id.et_telefono);
         btn_registrarse = findViewById(R.id.btn_registro);
         password = findViewById(R.id.et_password);
         db= Room.databaseBuilder(getApplicationContext(),
                 Database.class, "Prestamo").allowMainThreadQueries().build();
         pacienteList.addAll(db.pacienteDao().ObtenerTodo());
+        doctorList.addAll(db.doctorDao().ObtenerTodo());
         adminList.addAll(db.adminDao().ObtenerTodo());
         OcultarBoton();
     }
@@ -107,23 +111,37 @@ public class LoginActivity extends AppCompatActivity {
        for(int i = 0; i<adminList.size(); i++){
             if(name.equalsIgnoreCase(adminList.get(i).getUser_name())){
                 if(pwd.equalsIgnoreCase(adminList.get(i).getPassword())){
-                    Toast.makeText(this, "Todo bien, todo correcto", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, Administrador_Activity.class);
                     startActivity(intent);
                     break;
                 }
+                else
+                    Toast.makeText(this, "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
             }
+            else
+                Toast.makeText(this, "Nombre de usuario incorrecto", Toast.LENGTH_SHORT).show();
         }
+        user_name.setText("");
+        password.setText("");
 
     }
 
     public void EsUnDoctor(){
-        for(int i = 0; i<adminList.size(); i++){
-            if(name.equalsIgnoreCase(adminList.get(i).getUser_name())){
-                if(pwd.equalsIgnoreCase(adminList.get(i).getPassword())){
-                    Toast.makeText(this, "Todo bien, todo correcto", Toast.LENGTH_SHORT).show();
-                    break;
-                }
+        Doctor doctor = db.doctorDao().ObtenerPorUser_Name(user_name.getText().toString());
+        if(doctor == null){
+            Toast.makeText(this, "Usuario o contraseña incorrecto", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            pwd = password.getText().toString();
+            if(pwd.equalsIgnoreCase(doctor.getPassword())){
+                Intent intent = new Intent(this, Principal_Doctor_Activity.class);
+                intent.putExtra("doctor", doctor);
+                startActivityForResult(intent, 4545);
+                user_name.setText("");
+                password.setText("");
+            }
+            else{
+                Toast.makeText(this, "Contraseña Incorrecta ", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -137,12 +155,13 @@ public class LoginActivity extends AppCompatActivity {
             pwd = password.getText().toString();
             if(pwd.equalsIgnoreCase(paciente.getPassword())){
                 Intent intent = new Intent(this, Pacientes_Activity.class);
-                startActivity(intent);
+                intent.putExtra("paciente", paciente);
+                startActivityForResult(intent, 1234);
                 user_name.setText("");
                 password.setText("");
             }
             else{
-                Toast.makeText(this, "Usuario ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Contraseña Incorrecta ", Toast.LENGTH_SHORT).show();
             }
         }
     }

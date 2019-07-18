@@ -25,4 +25,7 @@ public interface EspecialidadDao {
     @Query("SELECT * FROM EspecialidadTB where nombre_especialidad=:nombre")
     Especialidad ObtenerporNombre(String nombre);
 
+    @Query("SELECT * FROM EspecialidadTB where id_especialidad=:id")
+    Especialidad ObtenerPorId(int id);
+
 }

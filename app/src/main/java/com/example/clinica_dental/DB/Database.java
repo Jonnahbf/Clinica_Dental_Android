@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import androidx.room.RoomDatabase;
 
 import com.example.clinica_dental.DAO.AdminDao;
+import com.example.clinica_dental.DAO.ConsultaDao;
 import com.example.clinica_dental.DAO.DoctorDao;
 import com.example.clinica_dental.DAO.EspecialidadDao;
 import com.example.clinica_dental.DAO.PacienteDao;
@@ -24,4 +25,5 @@ public abstract class Database extends RoomDatabase {
     public abstract DoctorDao doctorDao();
     public abstract EspecialidadDao especialidadDao();
     public abstract TieneEspecialidadDao tieneEspecialidadDao();
+    public abstract ConsultaDao consultaDao();
 }

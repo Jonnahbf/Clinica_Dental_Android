@@ -1,15 +1,10 @@
 package com.example.clinica_dental.Doctores;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,7 +17,6 @@ import com.example.clinica_dental.R;
 import com.example.clinica_dental.TablasDB.Doctor;
 import com.example.clinica_dental.TablasDB.DoctorhasEspecialidad;
 import com.example.clinica_dental.TablasDB.Especialidad;
-import com.example.clinica_dental.TablasDB.Paciente;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +104,7 @@ public class Agregar_Doctor_Activity extends AppCompatActivity {
         nombre = findViewById(R.id.et_nombre);
         apellido = findViewById(R.id.et_apellido2);
         telefono = findViewById(R.id.et_telefono);
-        usuario = findViewById(R.id.et_user_name);
+        usuario = findViewById(R.id.et_nombre_usuario);
         contraseña = findViewById(R.id.et_password);
     }
 

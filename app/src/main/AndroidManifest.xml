@@ -17,7 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Doctores.Ver_Doctores_Activity"></activity>
+        <activity android:name=".Doctores.Editar_Doctor_Activity"></activity>
+        <activity android:name=".Doctores.Consulta_po_Doctor_Activity" />
+        <activity android:name=".Doctores.Principal_Doctor_Activity" />
+        <activity android:name=".Consulta_Por_Paciente_Activity" />
+        <activity android:name=".Doctores.Editar_Doctores_Activity" />
+        <activity android:name=".Editar_Paciente_Activity" />
+        <activity android:name=".Doctores.Informacion_Doctores_Activity" />
+        <activity android:name=".Agendar_Cita_Activity" />
+        <activity android:name=".Doctores.Doctores_Ver" />
         <activity android:name=".Doctores.Agregar_Doctor_Activity" />
         <activity android:name=".Administrador_Activity" />
         <!--
